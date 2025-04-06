@@ -21,11 +21,9 @@ export default function Header() {
 
                     <SignedOut>
                         <SignInButton mode="modal">
-                            <Button variant="ghost" size="sm">Sign In</Button>
+                            <Button variant="ghost" className='border cursor-pointer' size="lg">Sign In</Button>
                         </SignInButton>
-                        <SignUpButton mode="modal">
-                            <Button variant="outline" size="sm">Sign Up</Button>
-                        </SignUpButton>
+                        
                     </SignedOut>
 
                     <SignedIn>
