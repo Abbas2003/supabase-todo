@@ -19,6 +19,14 @@ interface TodoItem {
     created_at: string;
 }
 
+type PostgrestError = {
+    message: string;
+    details: string | null;
+    hint: string | null;
+    code: string;
+  }
+  
+
 export default function TodoApp() {
     const [todos, setTodos] = useState<TodoItem[]>([]);
     const [newTodo, setNewTodo] = useState<string>("");
@@ -42,7 +50,7 @@ export default function TodoApp() {
 
             if (error) throw error;
             setTodos(data || []);
-        } catch (error: any) {
+        } catch (error: PostgrestError | any) {
             console.error("Error fetching todos:", error);
             toast.error("Error fetching todos", {
                 description: error.message,
@@ -73,7 +81,7 @@ export default function TodoApp() {
                 setNewTodo("");
                 toast.success("Task added successfully");
             }
-        } catch (error: any) {
+        } catch (error: PostgrestError | any ) {
             console.error("Error adding todo:", error);
             if (error.message.includes("row-level security")) {
                 toast.error("Permission denied", {
@@ -106,7 +114,7 @@ export default function TodoApp() {
                 setTodos(todos);
                 throw error;
             }
-        } catch (error: any) {
+        } catch (error: PostgrestError | any) {
             console.error("Error updating todo:", error);
             if (error.message.includes("row-level security")) {
                 toast.error("Permission denied", {
@@ -137,7 +145,7 @@ export default function TodoApp() {
             }
 
             toast.success("Task deleted successfully");
-        } catch (error: any) {
+        } catch (error: PostgrestError | any) {
             console.error("Error deleting todo:", error);
             if (error.message.includes("row-level security")) {
                 toast.error("Permission denied", {
@@ -175,7 +183,7 @@ export default function TodoApp() {
 
             setEditingId(null);
             toast.success("Task updated successfully");
-        } catch (error: any) {
+        } catch (error: PostgrestError | any) {
             console.error("Error updating todo:", error);
             if (error.message.includes("row-level security")) {
                 toast.error("Permission denied", {

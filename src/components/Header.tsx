@@ -2,7 +2,6 @@
 
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { ThemeToggle } from './theme-toggle'
 
